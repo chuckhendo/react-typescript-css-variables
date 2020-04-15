@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import declareCSSVariable from '../declare-css-variable';
+import declareCSSVariable from '../css-variables/declare-css-variable';
+import CSSVariable from '../css-variables/css-variable';
 
 const Button2 = styled('button')`
   ${declareCSSVariable('background')};
   ${declareCSSVariable('size')};
   ${declareCSSVariable('propWithDefault', { default: 'my default' })};
-  background: var(--background);
-  font-size: var(--size);
+
+  background: ${CSSVariable('background')};
+  font-size: ${CSSVariable('size')};
 `;
 
 export default Button2;
