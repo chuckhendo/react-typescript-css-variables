@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Button2 from './Button2';
 
 const Container = styled.div`
   align-items: center;
@@ -13,12 +14,7 @@ const Container = styled.div`
 const App: React.FC = () => {
   return (
     <Container>
-      <h1>App</h1>
-      <p>
-        Enter some text in this input in your browser, then edit App.tsx and
-        save. The text should remain inside of the input
-      </p>
-      <input />
+      <Button2 background="green">Test</Button2>
     </Container>
   );
 };
