@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button2 from './Button2';
+import Button from './Button';
 
 const Container = styled.div`
   align-items: center;
@@ -14,9 +14,9 @@ const Container = styled.div`
 const App: React.FC = () => {
   return (
     <Container>
-      <Button2 background="blue" size="100px" propWithDefault="asdf">
+      <Button background="blue" size="100px" propWithDefault="asdf">
         Test
-      </Button2>
+      </Button>
     </Container>
   );
 };
