@@ -14,7 +14,7 @@ const Container = styled.div`
 const App: React.FC = () => {
   return (
     <Container>
-      <Button2 background="blue" size="100px">
+      <Button2 background="blue" size="100px" propWithDefault="asdf">
         Test
       </Button2>
     </Container>
