@@ -1,18 +1,16 @@
 import styled from 'styled-components';
 
-function CSSVariable<T>(name: keyof T): (props: T) => string {
-  return (props: T) => {
+function CSSVariable<T, N extends string>(name: N) {
+  return (props: T & Record<N, any>) => {
     return `--${name}: ${props[name]}`;
   };
 }
 
-interface Props {
-  background: string;
-}
-
-const Button2 = styled('button')<Props>`
-  ${CSSVariable<Props>('background')};
+const Button2 = styled('button')`
+  ${CSSVariable('background')};
+  ${CSSVariable('size')};
   background: var(--background);
+  font-size: var(--size);
 `;
 
 export default Button2;
