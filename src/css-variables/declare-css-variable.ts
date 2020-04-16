@@ -1,5 +1,3 @@
-import kebabCase from 'lodash/kebabCase';
-
 export interface declareCSSVariableOptions {
   default?: string;
   transform?: (value: string) => string;
@@ -38,20 +36,20 @@ export default function declareCSSVariable<
   return (props: T & Record<N, any>) => {
     if (!(name in props) && !options?.default) {
       return '';
+    } else if (!(name in props) && options?.default) {
+      return `--${name}: ${options.default}`;
     }
-
-    const transformedName = kebabCase(name);
 
     if (!(name in props) && options?.default) {
       const transformedValue = options?.transform
         ? options.transform(options.default)
         : options.default;
-      return `--${transformedName}: ${transformedValue}`;
+      return `--${name}: ${transformedValue}`;
     }
 
     const transformedValue = options?.transform
       ? options.transform(props[name])
       : props[name];
-    return `--${transformedName}: ${transformedValue}`;
+    return `--${name}: ${transformedValue}`;
   };
 }
