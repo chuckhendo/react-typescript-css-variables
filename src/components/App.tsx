@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from './Button';
+import ThemeVariableProvider from '../css-variables/theme-variables';
+import { defaultTheme } from '../theme';
 
 const Container = styled.div`
   align-items: center;
@@ -14,9 +16,11 @@ const Container = styled.div`
 const App: React.FC = () => {
   return (
     <Container>
-      <Button backgroundRedness="50" size="100px" propWithDefault="asdf">
-        Test
-      </Button>
+      <ThemeVariableProvider theme={defaultTheme}>
+        <Button backgroundRedness="50" size="100px" propWithDefault="asdf">
+          Test
+        </Button>
+      </ThemeVariableProvider>
     </Container>
   );
 };

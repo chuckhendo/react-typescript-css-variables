@@ -9,8 +9,7 @@ const Button = styled('button')`
   ${declareCSSVariable('size')};
   ${declareCSSVariable('propWithDefault', { default: 'my default' })};
 
-  background: ${CSSVariable('backgroundRedness')};
-  font-size: ${CSSVariable('size')};
+  background: ${CSSVariable('colors-grayDark')};
 `;
 
 export default Button;
