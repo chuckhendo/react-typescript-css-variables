@@ -6,7 +6,7 @@ const Button = styled('button')`
   ${declareCSSVariable('backgroundRedness', {
     transform: (val) => `rgba(${val}, 0, 0, 1);`,
   })};
-  ${declareCSSVariable('textColor', { default: '#fff' })};
+  ${declareCSSVariable('textColor', { default: CSSVariable('colors-text') })};
   ${declareCSSVariable('size', { transform: (val) => `${val}rem` })};
 
   background: ${CSSVariable('backgroundRedness')};
