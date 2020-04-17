@@ -13,8 +13,8 @@ const Button = styled('button')`
   font-size: ${CSSVariable('size')};
   color: ${CSSVariable('textColor')};
 
-  /* I know I could do this with ems, just demonstrating calcs on props */
-  padding: calc(${CSSVariable('size')} / 3) calc(${CSSVariable('size')} / 2);
+  /* I know I could do this with ems, just demonstrating calcs on props. Can also access css variables directly, though they won't be type-checked */
+  padding: calc(${CSSVariable('size')} / 3) calc(var(--size) / 2);
 `;
 
 export default Button;
