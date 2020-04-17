@@ -6,11 +6,12 @@ const Button = styled('button')`
   ${declareCSSVariable('backgroundRedness', {
     transform: (val) => `rgba(${val}, 0, 0, 1);`,
   })};
-  ${declareCSSVariable('color', { default: '#fff' })};
+  ${declareCSSVariable('textColor', { default: '#fff' })};
   ${declareCSSVariable('size', { transform: (val) => `${val}rem` })};
 
   background: ${CSSVariable('backgroundRedness')};
   font-size: ${CSSVariable('size')};
+  color: ${CSSVariable('textColor')};
 
   /* I know I could do this with ems, just demonstrating calcs on props */
   padding: calc(${CSSVariable('size')} / 3) calc(${CSSVariable('size')} / 2);

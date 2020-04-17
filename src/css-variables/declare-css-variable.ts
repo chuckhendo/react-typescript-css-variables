@@ -9,24 +9,28 @@ type PropTypePrimitive = string | number;
 type PropTypeObject = Partial<
   Record<keyof DefaultTheme['breakpoints'], PropTypePrimitive>
 >;
-type PropType = PropTypePrimitive | PropTypeObject;
+type PropTypeFunction<T extends {}> = (props: T) => string;
+type PropType<T extends {}> =
+  | PropTypePrimitive
+  | PropTypeObject
+  | PropTypeFunction<T>;
 
-export interface declareCSSVariableOptions {
-  default?: PropType;
-  transform?: (value: PropType) => string;
+export interface declareCSSVariableOptions<T extends {}> {
+  default?: PropType<T>;
+  transform?: (value: PropType<T>) => string;
 }
 
 type declareCSSVariableCallbackRequired<T, N extends string> = (
-  props: T & Record<N, PropType>
+  props: T & Record<N, PropType<T>>
 ) => string;
 type declareCSSVariableCallbackOptional<T, N extends string> = (
-  props: T & Partial<Record<N, PropType>>
+  props: T & Partial<Record<N, PropType<T>>>
 ) => string;
 
 export default function declareCSSVariable<
   T extends HasThemeProp,
   N extends string,
-  O extends declareCSSVariableOptions
+  O extends declareCSSVariableOptions<T>
 >(
   name: N,
   options: O & { default: string }
@@ -34,19 +38,19 @@ export default function declareCSSVariable<
 export default function declareCSSVariable<
   T extends HasThemeProp,
   N extends string,
-  O extends declareCSSVariableOptions
+  O extends declareCSSVariableOptions<T>
 >(name: N, options?: O): declareCSSVariableCallbackRequired<T, N>;
 export default function declareCSSVariable<
   T extends HasThemeProp,
   N extends string,
-  O extends declareCSSVariableOptions
+  O extends declareCSSVariableOptions<T>
 >(
   name: N,
   options?: O
 ):
   | declareCSSVariableCallbackOptional<T, N>
   | declareCSSVariableCallbackRequired<T, N> {
-  return (props: T & Record<N, PropType>) => {
+  return (props: T & Record<N, PropType<T>>) => {
     let value = !(name in props) && options?.default ? options.default : '';
 
     if (name in props) {
@@ -59,6 +63,10 @@ export default function declareCSSVariable<
       } else {
         value = options.transform(value);
       }
+    }
+
+    if (typeof value === 'function') {
+      value = value(props);
     }
 
     if (typeof value === 'object') {
