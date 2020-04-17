@@ -16,4 +16,4 @@ Helper functions for using CSS variables in styled-components with Typescript
   - `CSSVariable` - this function outputs the result of a CSSVariable after all transforms are completed. Receives a single argument, which is the name of the previously declared variable OR a theme variable.
 - On the component itself, prop values for declared CSS variables can be strings, numbers, the CSSVariable helper, or a responsive object. The responsive object is typed to be the same as the breakpoints property in the theme. Not all breakpoints are required, and any valid prop value can also be set. All of the following are valid:
   - `{ sm: 300, md: 400 lg: 500 }`
-  - `{ small: CSSVariable('color-primary'), medium: '100px', large: '300px' }
+  - `{ small: CSSVariable('color-primary'), medium: '100px', large: '300px' }`
