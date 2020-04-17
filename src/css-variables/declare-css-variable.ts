@@ -6,10 +6,13 @@ interface HasThemeProp {
 }
 
 type PropTypePrimitive = string | number;
+type PropTypeFunction<T> = (props: T) => string;
 type PropTypeObject = Partial<
-  Record<keyof DefaultTheme['breakpoints'], PropTypePrimitive>
+  Record<
+    keyof DefaultTheme['breakpoints'],
+    PropTypePrimitive | PropTypeFunction<HasThemeProp>
+  >
 >;
-type PropTypeFunction<T extends {}> = (props: T) => string;
 type PropType<T extends {}> =
   | PropTypePrimitive
   | PropTypeObject
@@ -57,6 +60,15 @@ export default function declareCSSVariable<
       value = props[name];
     }
 
+    if (typeof value === 'object') {
+      value = mapValues(value, (val) => {
+        if (typeof val === 'function') {
+          return val(props);
+        }
+        return val;
+      });
+    }
+
     if (options?.transform) {
       if (typeof value === 'object') {
         value = mapValues(value, options.transform);
@@ -70,6 +82,7 @@ export default function declareCSSVariable<
     }
 
     if (typeof value === 'object') {
+      console.log(value);
       return createResponsiveCSSVariables(name, value, props.theme.breakpoints);
     }
 
@@ -89,10 +102,10 @@ function createResponsiveCSSVariables(
   return breakpointKeys
     .map((key) => {
       return `
-      @media screen and (min-width: ${breakpoints[key]}) {
-        --${name}: ${value[key]};
-      }
-    `;
+        @media screen and (min-width: ${breakpoints[key]}) {
+          --${name}: ${value[key]};
+        }
+      `;
     })
     .join('\n');
 }

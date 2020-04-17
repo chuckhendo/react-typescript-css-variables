@@ -59,6 +59,9 @@ const shared = {
     'space-md': '1rem',
     'space-lg': '2rem',
     'space-xl': '4rem',
+    'redness-nada': 0,
+    'redness-some': 100,
+    'redness-lots': 255,
   },
 } as const;
 

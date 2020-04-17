@@ -20,9 +20,9 @@ const App: React.FC = () => {
       <ThemeVariableProvider theme={defaultTheme}>
         <Button
           backgroundRedness={{
-            xs: 150,
+            xs: CSSVariable('redness-nada'),
             sm: 200,
-            xl: 250,
+            xl: CSSVariable('redness-lots'),
           }}
           size={2}
           textColor={CSSVariable('colors-white')}
