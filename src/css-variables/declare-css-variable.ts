@@ -6,9 +6,8 @@ interface HasThemeProp {
 }
 
 type PropTypePrimitive = string | number;
-type PropTypeObject = Record<
-  keyof DefaultTheme['breakpoints'],
-  PropTypePrimitive
+type PropTypeObject = Partial<
+  Record<keyof DefaultTheme['breakpoints'], PropTypePrimitive>
 >;
 type PropType = PropTypePrimitive | PropTypeObject;
 
