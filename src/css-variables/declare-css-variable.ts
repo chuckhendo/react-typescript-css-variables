@@ -1,13 +1,15 @@
+type PropType = string | number;
+
 export interface declareCSSVariableOptions {
   default?: string;
-  transform?: (value: string) => string;
+  transform?: (value: PropType) => string;
 }
 
 type declareCSSVariableCallbackRequired<T, N extends string> = (
-  props: T & Record<N, any>
+  props: T & Record<N, PropType>
 ) => string;
 type declareCSSVariableCallbackOptional<T, N extends string> = (
-  props: T & Partial<Record<N, any>>
+  props: T & Partial<Record<N, PropType>>
 ) => string;
 
 export default function declareCSSVariable<
@@ -33,7 +35,7 @@ export default function declareCSSVariable<
 ):
   | declareCSSVariableCallbackOptional<T, N>
   | declareCSSVariableCallbackRequired<T, N> {
-  return (props: T & Record<N, any>) => {
+  return (props: T & Record<N, PropType>) => {
     if (!(name in props) && !options?.default) {
       return '';
     } else if (!(name in props) && options?.default) {

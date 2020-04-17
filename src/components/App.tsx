@@ -17,7 +17,7 @@ const App: React.FC = () => {
   return (
     <Container>
       <ThemeVariableProvider theme={defaultTheme}>
-        <Button backgroundRedness="50" size="100px" propWithDefault="asdf">
+        <Button backgroundRedness={255} size="100px" propWithDefault="asdf">
           Test
         </Button>
       </ThemeVariableProvider>
