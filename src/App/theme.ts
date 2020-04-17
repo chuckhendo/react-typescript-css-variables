@@ -68,27 +68,4 @@ declare module 'styled-components' {
   interface DefaultTheme extends ThemeInterface {}
 }
 
-// const light = {
-//   ...shared,
-//   colors: {
-//     text: '#000',
-//     background: '#fff',
-//     primary: '#07c',
-//     secondary: '#30c',
-//     muted: '#f6f6f6',
-//   },
-// };
-
-// const dark = {
-//   ...shared,
-//   colors: {
-//     text: '#000',
-//     background: '#fff',
-//     primary: '#07c',
-//     secondary: '#30c',
-//     muted: '#f6f6f6',
-//   },
-// };
-
-// TODO: explore color mode switching light vs. dark
 export const defaultTheme = shared;
