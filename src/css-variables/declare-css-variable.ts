@@ -36,22 +36,16 @@ export default function declareCSSVariable<
   | declareCSSVariableCallbackOptional<T, N>
   | declareCSSVariableCallbackRequired<T, N> {
   return (props: T & Record<N, PropType>) => {
-    if (!(name in props) && !options?.default) {
-      return '';
-    } else if (!(name in props) && options?.default) {
-      return `--${name}: ${options.default}`;
+    let value = !(name in props) && options?.default ? options.default : '';
+
+    if (name in props) {
+      value = props[name];
     }
 
-    if (!(name in props) && options?.default) {
-      const transformedValue = options?.transform
-        ? options.transform(options.default)
-        : options.default;
-      return `--${name}: ${transformedValue}`;
+    if (options?.transform) {
+      value = options.transform(value);
     }
 
-    const transformedValue = options?.transform
-      ? options.transform(props[name])
-      : props[name];
-    return `--${name}: ${transformedValue}`;
+    return `--${name}: ${value}`;
   };
 }
